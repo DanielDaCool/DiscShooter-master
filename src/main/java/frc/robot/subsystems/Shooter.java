@@ -28,6 +28,7 @@ public class Shooter extends SubsystemBase {
     limelightTable = NetworkTableInstance.getDefault().getTable(LIMELIGHT_TABLE_KEY);
 
     setFlywheelPID(0.7, 0, 0);
+    mFlywheel.setInverted(false);
     
   }
 
@@ -43,14 +44,14 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getShootingVelocity() {
-    return mFlywheel.getSelectedSensorVelocity();
+    return -mFlywheel.getSelectedSensorVelocity();
   }
 
   public void setShootingPower(double power) {
     mFlywheel.set(ControlMode.PercentOutput, power);
   }
   public double getShootingPower() {
-    return(mFlywheel.getMotorOutputPercent());
+    return-(mFlywheel.getMotorOutputPercent());
   }
 
   public void stopShooting() {
