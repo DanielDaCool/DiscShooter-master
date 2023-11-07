@@ -10,12 +10,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Servo;
 
 import static frc.robot.Constants.ShooterConstants.*;
 
 public class Shooter extends SubsystemBase {
   private final TalonFX mFlywheel;
-
+  private final Servo servo;
 
   private final NetworkTable limelightTable;
 
@@ -24,6 +25,7 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     super();
     mFlywheel = new TalonFX(FLYWHEEL_MOTOR_ID);
+    servo = new Servo(SERVO_ID);
 
     limelightTable = NetworkTableInstance.getDefault().getTable(LIMELIGHT_TABLE_KEY);
 
@@ -57,7 +59,9 @@ public class Shooter extends SubsystemBase {
   public void stopShooting() {
     setShootingPower(0);
   }
-  
+  public void setServoToAngle(double servoAngle){
+    servo.setAngle(servoAngle);
+  }
   
   
 }

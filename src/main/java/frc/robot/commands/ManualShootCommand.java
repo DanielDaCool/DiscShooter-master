@@ -8,6 +8,7 @@ import frc.robot.subsystems.Shooter;
 public class ManualShootCommand extends CommandBase {
   private final Shooter shooter;
   private final CommandXboxController controller;
+  
 
   public ManualShootCommand(Shooter shooter, CommandXboxController controller) {
     this.shooter = shooter;
@@ -19,11 +20,13 @@ public class ManualShootCommand extends CommandBase {
   @Override
   public void initialize() {
     shooter.stopShooting();
+    shooter.setServoToAngle(0);
   }
 
   @Override
   public void execute() {
     shooter.setShootingPower(controller.getLeftY());
+    shooter.setServoToAngle(90);
 
   }
 }
